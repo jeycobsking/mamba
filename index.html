@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mamba Village Nairobi — Tourism & Operations Platform</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <aside class="announcement-bar">
+    <div class="announcement-content">
+      <span class="badge-pulse">● LIVE PARK STATUS</span>
+      <span>Park Open Daily: 9:00 AM – 6:00 PM | Next Nile Crocodile Feeding Show: <strong>2:30 PM Today</strong></span>
+      <span class="academic-badge">KeMU CISY 401 Final Year Project Preview</span>
+    </div>
+  </aside>
+
+  <!-- Main Navigation Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#" class="brand-logo" onclick="switchMainView('visitor')">
+        <div class="brand-icon">🐊</div>
+        <div class="brand-text">
+          <span class="brand-title">Mamba Village</span>
+          <span class="brand-sub">Nairobi Eco-Park & Sanctuary</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="main-nav" id="visitorNav">
+        <a href="#attractions" class="nav-link">Attractions</a>
+        <a href="#feeding" class="nav-link">Feeding Times</a>
+        <a href="#booking" class="nav-link highlight">Book Tickets</a>
+        <a href="#groups" class="nav-link">School & Groups</a>
+        <a href="#reviews" class="nav-link">Reviews</a>
+        <a href="#about" class="nav-link">About Park</a>
+        <a href="#help" class="nav-link">Help / FAQ</a>
+      </nav>
+
+      <!-- View Switcher & Action Button -->
+      <div class="header-actions">
+        <!-- Role Portal Switcher -->
+        <div class="view-switch-pill">
+          <button class="view-btn active" id="btnVisitorView" onclick="switchMainView('visitor')">
+            <span class="icon">🌿</span> Visitor Portal
+          </button>
+          <button class="view-btn" id="btnStaffView" onclick="switchMainView('staff')">
+            <span class="icon">⚙️</span> Staff & Admin
+          </button>
+        </div>
+
+        <button class="btn btn-primary" onclick="scrollToBooking()">
+          <span>Tickets & Passes</span> →
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- VISITOR PORTAL VIEW                                             -->
+  <!-- ============================================================== -->
+  <main id="visitorViewContainer">
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-pattern-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span class="tag-icon">🇰🇪</span>
+          <span>East Africa's Largest Crocodile Sanctuary</span>
+        </div>
+        <h1 class="hero-headline">
+          Discover the Wild Majesty of <span class="text-gradient">Mamba Village Nairobi</span>
+        </h1>
+        <p class="hero-lead">
+          Home to over 70 giant Nile crocodiles, towering ostriches, prehistoric tortoises, serene botanical gardens, and tranquil boat rides on Lake Mamba. Book your e-tickets seamlessly with instant M-Pesa checkout!
+        </p>
+
+        <div class="hero-cta-group">
+          <button class="btn btn-gold btn-large" onclick="scrollToBooking()">
+            🎟️ Book Tickets & Tours
+          </button>
+          <a href="#feeding" class="btn btn-outline-white btn-large">
+            🕒 Feeding Schedule
+          </a>
+          <button class="btn btn-glass btn-large" onclick="openTicketWalletModal()">
+            📱 View My Digital Ticket
+          </button>
+        </div>
+
+        <!-- Quick Stats Strip -->
+        <div class="hero-stats-grid">
+          <div class="stat-card">
+            <div class="stat-num">70+</div>
+            <div class="stat-label">Nile Crocodiles</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">4.8★</div>
+            <div class="stat-label">Over 1,200 Reviews</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Instant M-Pesa E-Tickets</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">30+</div>
+            <div class="stat-label">Acres of Wildlife & Flora</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Global Search & Discovery Bar (Module 16) -->
+    <section class="search-section">
+      <div class="search-box-card">
+        <div class="search-input-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="parkSearchInput" placeholder="Search attractions, feeding times, school packages, ticket prices, FAQs..." oninput="handleParkSearch(this.value)">
+          <button class="search-clear-btn" id="searchClearBtn" onclick="clearParkSearch()" style="display: none;">✕</button>
+        </div>
+        <div class="search-tags">
+          <span class="tag-label">Popular searches:</span>
+          <button class="pill-chip" onclick="quickSearch('crocodile feeding')">Crocodile Feeding</button>
+          <button class="pill-chip" onclick="quickSearch('boat ride')">Lake Boat Ride</button>
+          <button class="pill-chip" onclick="quickSearch('school package')">School Group Rate</button>
+          <button class="pill-chip" onclick="quickSearch('ostrich')">Ostrich Farm</button>
+          <button class="pill-chip" onclick="quickSearch('m-pesa')">M-Pesa Payment</button>
+        </div>
+        <div id="searchResultsDropdown" class="search-results-panel" style="display: none;">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Attractions Showcase (Module 17 & Scope) -->
+    <section class="section-container" id="attractions">
+      <div class="section-header text-center">
+        <span class="section-subtitle">Exhibitions & Encounters</span>
+        <h2 class="section-title">Iconic Wonders at Mamba Village</h2>
+        <p class="section-desc">Experience an unforgettable family safari adventure right in the heart of Nairobi.</p>
+      </div>
+
+      <div class="attractions-grid" id="attractionsContainer">
+        <!-- Rendered via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Daily Feeding & Event Schedule (Module 4) -->
+    <section class="section-container schedule-section" id="feeding">
+      <div class="section-header text-center">
+        <span class="section-subtitle">Live Wildlife Highlights</span>
+        <h2 class="section-title">Daily Shows & Feeding Times</h2>
+        <p class="section-desc">Witness our veteran keepers feed massive Nile crocodiles and interact safely with African ostriches.</p>
+      </div>
+
+      <div class="schedule-filter-tabs">
+        <button class="filter-btn active" onclick="filterSchedule('all')">All Events</button>
+        <button class="filter-btn" onclick="filterSchedule('feeding')">Feeding Shows</button>
+        <button class="filter-btn" onclick="filterSchedule('tour')">Guided Tours</button>
+        <button class="filter-btn" onclick="filterSchedule('family')">Family & Kids</button>
+      </div>
+
+      <div class="timeline-container" id="scheduleTimeline">
+        <!-- Rendered via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Interactive Ticket Booking & Calculator (Module 7 & 10 & 13) -->
+    <section class="section-container booking-section" id="booking">
+      <div class="section-header text-center">
+        <span class="section-subtitle">Effortless Online Reservation</span>
+        <h2 class="section-title">Book Tickets & Activity Passes</h2>
+        <p class="section-desc">Fast, paperless, and cashless. Pay directly via M-Pesa or Card and get your digital QR ticket instantly.</p>
+      </div>
+
+      <div class="booking-grid">
+        <!-- Left Column: Booking Form -->
+        <div class="booking-form-card">
+          <div class="step-indicator">
+            <span class="step-badge active">1. Date & Visit Info</span>
+            <span class="step-line"></span>
+            <span class="step-badge active">2. Select Passes</span>
+            <span class="step-line"></span>
+            <span class="step-badge active">3. Checkout</span>
+          </div>
+
+          <form id="ticketBookingForm" onsubmit="event.preventDefault(); initiateCheckout();">
+            <!-- Visit Date & Session -->
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="visitDate">Date of Visit</label>
+                <input type="date" id="visitDate" required>
+              </div>
+              <div class="form-group flex-1">
+                <label for="visitSession">Preferred Arrival Session</label>
+                <select id="visitSession">
+                  <option value="morning">Morning Session (9:00 AM – 1:00 PM)</option>
+                  <option value="afternoon" selected>Afternoon & Feeding Show (1:30 PM – 5:30 PM)</option>
+                  <option value="fullday">Full Day Pass (9:00 AM – 6:00 PM)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Customer Details (Module 1.5.3) -->
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="custName">Full Name</label>
+                <input type="text" id="custName" placeholder="e.g., Cyrrus Korir" required>
+              </div>
+              <div class="form-group flex-1">
+                <label for="custEmail">Email Address</label>
+                <input type="email" id="custEmail" placeholder="cyrrus@example.com" required>
+              </div>
+              <div class="form-group flex-1">
+                <label for="custPhone">M-Pesa Mobile Number</label>
+                <input type="tel" id="custPhone" placeholder="0712 345 678" pattern="^(07|01|\+254)[0-9]{8}$" required>
+              </div>
+            </div>
+
+            <!-- Ticket Tiers Selector (Module 1.5.7) -->
+            <div class="ticket-tiers-box">
+              <h4 class="box-title">Choose Admission Categories</h4>
+
+              <div class="ticket-counter-row">
+                <div class="tier-info">
+                  <strong>Kenyan Citizen / Resident Adult</strong>
+                  <span class="tier-price">KES 500 / person</span>
+                </div>
+                <div class="counter-ctrls">
+                  <button type="button" class="btn-count" onclick="updateTicketQty('citizenAdult', -1)">−</button>
+                  <span class="qty-display" id="qty_citizenAdult">1</span>
+                  <button type="button" class="btn-count" onclick="updateTicketQty('citizenAdult', 1)">+</button>
+                </div>
+              </div>
+
+              <div class="ticket-counter-row">
+                <div class="tier-info">
+                  <strong>Kenyan Child (Ages 3–12)</strong>
+                  <span class="tier-price">KES 300 / child</span>
+                </div>
+                <div class="counter-ctrls">
+                  <button type="button" class="btn-count" onclick="updateTicketQty('citizenChild', -1)">−</button>
+                  <span class="qty-display" id="qty_citizenChild">0</span>
+                  <button type="button" class="btn-count" onclick="updateTicketQty('citizenChild', 1)">+</button>
+                </div>
+              </div>
+
+              <div class="ticket-counter-row">
+                <div class="tier-info">
+                  <strong>International Tourist (Adult)</strong>
+                  <span class="tier-price">KES 2,000 (~$15 USD)</span>
+                </div>
+                <div class="counter-ctrls">
+                  <button type="button" class="btn-count" onclick="updateTicketQty('nonResidentAdult', -1)">−</button>
+                  <span class="qty-display" id="qty_nonResidentAdult">0</span>
+                  <button type="button" class="btn-count" onclick="updateTicketQty('nonResidentAdult', 1)">+</button>
+                </div>
+              </div>
+
+              <div class="ticket-counter-row">
+                <div class="tier-info">
+                  <strong>Student ID Pass</strong>
+                  <span class="tier-price">KES 250 / student</span>
+                </div>
+                <div class="counter-ctrls">
+                  <button type="button" class="btn-count" onclick="updateTicketQty('student', -1)">−</button>
+                  <span class="qty-display" id="qty_student">0</span>
+                  <button type="button" class="btn-count" onclick="updateTicketQty('student', 1)">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Activity Add-ons (Module 1.5.10 & 1.5.11) -->
+            <div class="addons-box">
+              <h4 class="box-title">Optional Activity Add-Ons</h4>
+              <div class="addon-checkboxes">
+                <label class="addon-item">
+                  <input type="checkbox" id="addonBoatRide" onchange="recalculateTotal()">
+                  <div class="addon-details">
+                    <span class="addon-name">🛶 Lake Mamba Scenic Boat Ride</span>
+                    <span class="addon-rate">+KES 300 / person</span>
+                  </div>
+                </label>
+
+                <label class="addon-item">
+                  <input type="checkbox" id="addonFeedingPlatform" onchange="recalculateTotal()">
+                  <div class="addon-details">
+                    <span class="addon-name">🥩 VIP Feeding Platform Experience</span>
+                    <span class="addon-rate">+KES 500 flat</span>
+                  </div>
+                </label>
+
+                <label class="addon-item">
+                  <input type="checkbox" id="addonGuide" onchange="recalculateTotal()">
+                  <div class="addon-details">
+                    <span class="addon-name">🧭 Private Dedicated Tour Guide</span>
+                    <span class="addon-rate">+KES 1,000 flat</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-gold btn-block btn-large mt-3">
+              Proceed to Secure Payment ➔
+            </button>
+          </form>
+        </div>
+
+        <!-- Right Column: Order Summary & Live Breakdown -->
+        <div class="order-summary-card">
+          <div class="card-badge">Instant Electronic Confirmation</div>
+          <h3 class="summary-title">Booking Summary</h3>
+          <div class="summary-meta" id="summaryMeta">
+            <div><strong>Date:</strong> <span id="sumDate">Selected Date</span></div>
+            <div><strong>Session:</strong> <span id="sumSession">Afternoon</span></div>
+          </div>
+
+          <hr class="divider">
+
+          <div class="summary-line-items" id="summaryLineItems">
+            <!-- Dynamic Line items -->
+          </div>
+
+          <hr class="divider">
+
+          <div class="summary-totals">
+            <div class="total-row">
+              <span>Subtotal:</span>
+              <span id="sumSubtotal">KES 500</span>
+            </div>
+            <div class="total-row">
+              <span>Park Conservation Levy (Included):</span>
+              <span>KES 0</span>
+            </div>
+            <div class="total-row total-highlight">
+              <span>Grand Total:</span>
+              <span id="sumGrandTotal">KES 500</span>
+            </div>
+          </div>
+
+          <div class="security-guarantee">
+            <span class="shield-icon">🛡️</span>
+            <span>Secured with Daraja M-Pesa STK Push API simulation. Automatic QR ticket issued instantly.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- School & Group Booking Module (Module 11 & 9) -->
+    <section class="section-container group-section" id="groups">
+      <div class="group-banner-card">
+        <div class="group-banner-text">
+          <span class="section-subtitle light">Educational & Corporate Packages</span>
+          <h2 class="section-title light">Planning a School Tour or Corporate Event?</h2>
+          <p class="light-p">
+            We host over 200 school expeditions every year! Special discounted student bundles include guided botanical walks, reptile anatomy lectures by our zoologists, and lunch arrangements.
+          </p>
+          <ul class="group-perks">
+            <li>✓ Tailored wildlife biology syllabus modules</li>
+            <li>✓ Complimentary admission for 1 teacher per 15 students</li>
+            <li>✓ Dedicated tour guide assigned for institutional safety</li>
+            <li>✓ Official KeMU/School e-invoices with VAT breakdowns</li>
+          </ul>
+        </div>
+        <div class="group-form-wrap">
+          <form class="group-booking-form" onsubmit="handleGroupInquiry(event)">
+            <h4>Request Group / VIP Quote</h4>
+            <div class="form-group">
+              <label>Institution / Company Name</label>
+              <input type="text" id="grpOrgName" placeholder="e.g., St. Austin's Academy" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label>Estimated Headcount</label>
+                <input type="number" id="grpHeadcount" min="15" max="500" value="30" required>
+              </div>
+              <div class="form-group flex-1">
+                <label>Tentative Date</label>
+                <input type="date" id="grpDate" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Special Requests (e.g. Nyama Choma buffet, Boat rides)</label>
+              <textarea id="grpNotes" rows="2" placeholder="Tell us about your itinerary requirements..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-gold btn-block">Submit Group Booking Request</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews & Visitor Feedback Module (Module 15) -->
+    <section class="section-container" id="reviews">
+      <div class="section-header text-center">
+        <span class="section-subtitle">Visitor Experiences</span>
+        <h2 class="section-title">What Our Guests Say</h2>
+        <p class="section-desc">Transparent feedback directly from tourists and families who visited Mamba Village.</p>
+      </div>
+
+      <div class="reviews-split-layout">
+        <!-- Live Reviews Grid -->
+        <div class="reviews-grid" id="reviewsWall">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- Add Feedback Form -->
+        <div class="feedback-card">
+          <h3>Share Your Experience</h3>
+          <p class="sub-lead">Help park management enhance animal exhibits and facilities.</p>
+          <form id="feedbackForm" onsubmit="submitVisitorFeedback(event)">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" id="fbName" placeholder="e.g. Faith Wanjiku" required>
+            </div>
+            <div class="form-group">
+              <label>Rating</label>
+              <div class="star-rating-select">
+                <span class="star" onclick="setRating(1)">★</span>
+                <span class="star" onclick="setRating(2)">★</span>
+                <span class="star" onclick="setRating(3)">★</span>
+                <span class="star" onclick="setRating(4)">★</span>
+                <span class="star active" onclick="setRating(5)">★</span>
+                <input type="hidden" id="fbRatingVal" value="5">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Category</label>
+              <select id="fbCategory">
+                <option value="Crocodile Exhibit">Crocodile Exhibit & Feeding</option>
+                <option value="Tour Guide Service">Tour Guide Service</option>
+                <option value="Boat Rides">Boat Rides on Lake Mamba</option>
+                <option value="Restaurant & Hospitality">Restaurant & Food</option>
+                <option value="Ticketing & Cleanliness">Ticketing & Park Facilities</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Your Review & Suggestions</label>
+              <textarea id="fbComment" rows="3" placeholder="How was your visit? Any suggestions for our team?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Publish Feedback</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us & Park Map (Module 17) -->
+    <section class="section-container about-section" id="about">
+      <div class="about-grid">
+        <div class="about-info">
+          <span class="section-subtitle">Sanctuary History & Mission</span>
+          <h2 class="section-title">Preserving East African Reptiles Since 1996</h2>
+          <p>
+            Mamba Village Nairobi is widely recognized as Kenya’s premier reptile conservation facility. Situated on the scenic expanse of Karen/Langata, the park balances eco-tourism with active conservation of threatened Nile crocodiles and endangered indigenous reptiles.
+          </p>
+          <div class="about-pillars">
+            <div class="pillar-item">
+              <span class="pillar-icon">🌱</span>
+              <div>
+                <strong>Botanical Oasis</strong>
+                <p>Curated rare indigenous flora, medicinal shrubs, and tranquil water lily ponds.</p>
+              </div>
+            </div>
+            <div class="pillar-item">
+              <span class="pillar-icon">🎓</span>
+              <div>
+                <strong>Academic Center</strong>
+                <p>Partnering with universities and wildlife researchers across Kenya.</p>
+              </div>
+            </div>
+            <div class="pillar-item">
+              <span class="pillar-icon">📍</span>
+              <div>
+                <strong>Convenient Location</strong>
+                <p>Langata North Road, 25 minutes from Nairobi CBD. Safe, spacious parking.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-map-card">
+          <div class="map-header">
+            <h4>🗺️ Interactive Sanctuary Map Zones</h4>
+            <span class="badge">Click zone to explore</span>
+          </div>
+          <div class="interactive-map-zone" id="parkInteractiveMap">
+            <div class="zone-point p1" onclick="showZoneInfo('croc')">
+              <span>🐊 Zone A: Crocodile Pits</span>
+            </div>
+            <div class="zone-point p2" onclick="showZoneInfo('lake')">
+              <span>🛶 Zone B: Lake Mamba</span>
+            </div>
+            <div class="zone-point p3" onclick="showZoneInfo('ostrich')">
+              <span>🦤 Zone C: Ostrich Enclosure</span>
+            </div>
+            <div class="zone-point p4" onclick="showZoneInfo('botanical')">
+              <span>🌸 Zone D: Botanical Walks</span>
+            </div>
+            <div class="zone-point p5" onclick="showZoneInfo('dining')">
+              <span>🍽️ Zone E: Garden Restaurant</span>
+            </div>
+          </div>
+          <div class="zone-detail-card" id="zoneDetailCard">
+            <strong>Zone A: Giant Nile Crocodile Sanctuary</strong>
+            <p>Home to the primary breeding pools and the popular elevated feeding observation bridge.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Help & FAQ Module (Module 18) -->
+    <section class="section-container faq-section" id="help">
+      <div class="section-header text-center">
+        <span class="section-subtitle">Frequently Asked Questions</span>
+        <h2 class="section-title">Visitor Information & Guidelines</h2>
+      </div>
+
+      <div class="faq-accordion-wrap">
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>What are the peak crocodile feeding times?</span>
+            <span class="faq-chevron">+</span>
+          </div>
+          <div class="faq-answer">
+            Crocodile feeding is conducted every day at <strong>2:30 PM</strong> and <strong>4:30 PM</strong>. We recommend arriving at least 30 minutes prior to secure prime observation spots on the upper gallery.
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>How do digital QR tickets work at the entry gate?</span>
+            <span class="faq-chevron">+</span>
+          </div>
+          <div class="faq-answer">
+            Upon completing your M-Pesa payment, a digital ticket with a unique scannable QR code is instantly saved to your browser wallet and emailed to you. You can either show it directly on your smartphone screen or print it.
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>Is parking available on site?</span>
+            <span class="faq-chevron">+</span>
+          </div>
+          <div class="faq-answer">
+            Yes! Secure, gated parking with dedicated security wardens is available free of charge for all ticketed guests and school tour buses.
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>Can we host private events, birthdays, or weddings at the park?</span>
+            <span class="faq-chevron">+</span>
+          </div>
+          <div class="faq-answer">
+            Absolutely. Our manicured gardens and banquet gazebos can host up to 600 attendees. You can request a quote via the Group Booking section or contact our Service Manager directly.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================== -->
+  <!-- STAFF & ADMINISTRATOR CONTROL CENTER (Modules 1.5.2 - 1.5.14)   -->
+  <!-- ============================================================== -->
+  <main id="staffViewContainer" style="display: none;">
+    <section class="admin-wrapper">
+      <!-- Admin Sidebar / Role Navigation -->
+      <aside class="admin-sidebar">
+        <div class="admin-sidebar-header">
+          <div class="admin-avatar">🐊</div>
+          <div class="admin-profile-info">
+            <h4 id="currentRoleTitle">Super Administrator</h4>
+            <span class="status-online">● Online System</span>
+          </div>
+        </div>
+
+        <div class="role-selector-box">
+          <label>Active Staff Perspective:</label>
+          <select id="staffRoleSwitcher" onchange="changeStaffPerspective(this.value)">
+            <option value="admin">Administrator Module (§1.5.2)</option>
+            <option value="finance">Finance Manager Module (§1.5.6)</option>
+            <option value="events">Event Manager Module (§1.5.4)</option>
+            <option value="guide">Tour Guide Module (§1.5.8)</option>
+            <option value="service">Service Manager Module (§1.5.9)</option>
+            <option value="supplier">Supplier Logistics Module (§1.5.5)</option>
+          </select>
+        </div>
+
+        <nav class="admin-nav">
+          <button class="admin-nav-item active" onclick="switchAdminTab('dashOverview')">📊 Operations Dashboard</button>
+          <button class="admin-nav-item" onclick="switchAdminTab('dashBookings')">🎟️ Bookings & Gate Scanner</button>
+          <button class="admin-nav-item" onclick="switchAdminTab('dashFinance')">💰 Finance & M-Pesa Ledger</button>
+          <button class="admin-nav-item" onclick="switchAdminTab('dashTours')">🧭 Tour Guide Roster</button>
+          <button class="admin-nav-item" onclick="switchAdminTab('dashEvents')">📅 Event & Show Planner</button>
+          <button class="admin-nav-item" onclick="switchAdminTab('dashSuppliers')">📦 Supplier Deliveries</button>
+          <button class="admin-nav-item" onclick="switchAdminTab('dashReports')">📈 Statistical Reports</button>
+        </nav>
+
+        <div class="admin-sidebar-footer">
+          <button class="btn btn-outline-white btn-block btn-small" onclick="switchMainView('visitor')">
+            ← Return to Visitor Site
+          </button>
+        </div>
+      </aside>
+
+      <!-- Admin Main Content Area -->
+      <div class="admin-main-panel">
+
+        <!-- Top Header for Admin Panel -->
+        <div class="admin-topbar">
+          <div class="topbar-left">
+            <h2 id="adminSectionHeader">Park Operations Overview</h2>
+            <span class="text-muted">Real-time telemetry for Mamba Village Nairobi</span>
+          </div>
+          <div class="topbar-right">
+            <button class="btn btn-outline btn-small" onclick="resetPrototypeData()">🔄 Reset Demo Data</button>
+            <button class="btn btn-gold btn-small" onclick="openGateScannerModal()">📷 Scan QR Gate Pass</button>
+          </div>
+        </div>
+
+        <!-- TAB 1: DASHBOARD OVERVIEW -->
+        <div id="tab_dashOverview" class="admin-tab-pane active">
+          <!-- KPI Metrics Row -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-label">Today's Visitors</div>
+              <div class="kpi-value" id="kpiVisitors">142</div>
+              <div class="kpi-trend positive">↑ 18% vs yesterday</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Gross Revenue Today</div>
+              <div class="kpi-value text-gold" id="kpiRevenue">KES 84,500</div>
+              <div class="kpi-trend positive">94% via M-Pesa STK</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Active Guided Tours</div>
+              <div class="kpi-value" id="kpiTours">3</div>
+              <div class="kpi-trend neutral">4 Guides on duty</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Pending Institutional Quotes</div>
+              <div class="kpi-value" id="kpiQuotes">2</div>
+              <div class="kpi-trend warning">Needs service approval</div>
+            </div>
+          </div>
+
+          <!-- Quick Actions & Alerts Grid -->
+          <div class="admin-grid-two">
+            <!-- Active Feeding & Schedule Watch -->
+            <div class="admin-card">
+              <div class="card-head-between">
+                <h3>Today's Feeding & Event Queue</h3>
+                <span class="badge badge-green">Operating Normally</span>
+              </div>
+              <div class="table-responsive">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Time</th>
+                      <th>Attraction</th>
+                      <th>Location</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="adminScheduleTable">
+                    <!-- Populated via JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Recent Live Bookings -->
+            <div class="admin-card">
+              <div class="card-head-between">
+                <h3>Recent Ticket Purchases</h3>
+                <button class="link-btn" onclick="switchAdminTab('dashBookings')">View All</button>
+              </div>
+              <div class="table-responsive">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Ticket ID</th>
+                      <th>Visitor</th>
+                      <th>Amount</th>
+                      <th>Method</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="adminRecentBookings">
+                    <!-- Populated via JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: BOOKINGS & GATE SCANNER (Module 1.5.7) -->
+        <div id="tab_dashBookings" class="admin-tab-pane">
+          <div class="admin-card">
+            <div class="card-head-between">
+              <div>
+                <h3>Gate Entry & Booking Register</h3>
+                <p class="text-muted">Lookup ticket codes, verify guest credentials, and validate admission.</p>
+              </div>
+              <div class="filter-search-wrap">
+                <input type="text" id="bookingSearchInput" placeholder="Filter by Ticket ID, Name, Phone..." oninput="filterBookingsTable(this.value)">
+              </div>
+            </div>
+
+            <div class="table-responsive mt-3">
+              <table class="admin-table full-table">
+                <thead>
+                  <tr>
+                    <th>Ticket Code</th>
+                    <th>Customer Name</th>
+                    <th>Contact Phone</th>
+                    <th>Visit Date</th>
+                    <th>Passes Breakdown</th>
+                    <th>Total</th>
+                    <th>Payment Ref</th>
+                    <th>Gate Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="allBookingsTableBody">
+                  <!-- Dynamic rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: FINANCE & M-PESA LEDGER (Module 1.5.6 & 1.5.12) -->
+        <div id="tab_dashFinance" class="admin-tab-pane">
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-label">M-Pesa Receipts Settled</div>
+              <div class="kpi-value text-green" id="finMpesaTotal">KES 178,200</div>
+              <div class="kpi-sub">Safaricom Daraja STK Push</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Card & POS Receipts</div>
+              <div class="kpi-value" id="finCardTotal">KES 24,000</div>
+              <div class="kpi-sub">Visa / Mastercard</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Pending Invoices</div>
+              <div class="kpi-value text-gold" id="finPendingInv">KES 45,000</div>
+              <div class="kpi-sub">School Group Excursions</div>
+            </div>
+          </div>
+
+          <div class="admin-card mt-4">
+            <div class="card-head-between">
+              <div>
+                <h3>Financial Transaction Ledger & Invoices</h3>
+                <p class="text-muted">Reconciliation list with M-Pesa receipt verification and VAT tax calculation.</p>
+              </div>
+              <button class="btn btn-outline btn-small" onclick="exportFinanceCSV()">📥 Export CSV Statement</button>
+            </div>
+
+            <div class="table-responsive mt-3">
+              <table class="admin-table full-table">
+                <thead>
+                  <tr>
+                    <th>Invoice #</th>
+                    <th>Transaction Date</th>
+                    <th>Client / Customer</th>
+                    <th>Channel</th>
+                    <th>Provider Reference</th>
+                    <th>Amount (KES)</th>
+                    <th>Reconciliation</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="financeLedgerBody">
+                  <!-- Dynamic rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: TOUR GUIDE ROSTER (Module 1.5.8) -->
+        <div id="tab_dashTours" class="admin-tab-pane">
+          <div class="admin-card">
+            <div class="card-head-between">
+              <div>
+                <h3>Tour Guide Allocation & Itinerary Control</h3>
+                <p class="text-muted">Assign certified wildlife guides to incoming school batches and VIP tourists.</p>
+              </div>
+              <button class="btn btn-gold btn-small" onclick="promptAddGuideAssignment()">+ Dispatch New Guide</button>
+            </div>
+
+            <div class="tour-guides-grid mt-3" id="tourGuidesGrid">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: EVENT & SHOW PLANNER (Module 1.5.4) -->
+        <div id="tab_dashEvents" class="admin-tab-pane">
+          <div class="admin-card">
+            <div class="card-head-between">
+              <div>
+                <h3>Show & Event Timetable Management</h3>
+                <p class="text-muted">Schedule crocodile feeding spectacles and auditorium presentations.</p>
+              </div>
+              <button class="btn btn-gold btn-small" onclick="openCreateEventModal()">+ Add New Show Slot</button>
+            </div>
+
+            <div class="table-responsive mt-3">
+              <table class="admin-table full-table">
+                <thead>
+                  <tr>
+                    <th>Event / Activity</th>
+                    <th>Scheduled Time</th>
+                    <th>Target Wildlife</th>
+                    <th>Keeper in Charge</th>
+                    <th>Capacity</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminEventsManagerBody">
+                  <!-- Dynamic rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 6: SUPPLIER DELIVERIES (Module 1.5.5) -->
+        <div id="tab_dashSuppliers" class="admin-tab-pane">
+          <div class="admin-card">
+            <div class="card-head-between">
+              <div>
+                <h3>Park Supply Requisitions & Deliveries</h3>
+                <p class="text-muted">Manage food supplies for 70+ crocodiles, boat maintenance parts, and concession stock.</p>
+              </div>
+              <button class="btn btn-gold btn-small" onclick="promptNewSupplyOrder()">+ Order Supplies</button>
+            </div>
+
+            <div class="table-responsive mt-3">
+              <table class="admin-table full-table">
+                <thead>
+                  <tr>
+                    <th>Order PO #</th>
+                    <th>Supplier Partner</th>
+                    <th>Item Description</th>
+                    <th>Quantity</th>
+                    <th>Expected Date</th>
+                    <th>Delivery Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="supplierOrdersBody">
+                  <!-- Dynamic rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 7: REPORTS & ANALYTICS (Module 1.5.14) -->
+        <div id="tab_dashReports" class="admin-tab-pane">
+          <div class="admin-card">
+            <div class="card-head-between">
+              <div>
+                <h3>Management Statistical Reports</h3>
+                <p class="text-muted">Generated analytics fulfilling KeMU Specific Objective #4.</p>
+              </div>
+              <button class="btn btn-outline btn-small" onclick="window.print()">🖨️ Print Report</button>
+            </div>
+
+            <div class="reports-container mt-3">
+              <!-- Visual Bar Chart Representation (Pure CSS) -->
+              <div class="chart-box">
+                <h4>Weekly Visitor Flow (Mon - Sun)</h4>
+                <div class="css-bar-chart">
+                  <div class="bar-col"><div class="bar" style="height: 45%;"><span>450</span></div><label>Mon</label></div>
+                  <div class="bar-col"><div class="bar" style="height: 52%;"><span>520</span></div><label>Tue</label></div>
+                  <div class="bar-col"><div class="bar" style="height: 40%;"><span>400</span></div><label>Wed</label></div>
+                  <div class="bar-col"><div class="bar" style="height: 65%;"><span>650</span></div><label>Thu</label></div>
+                  <div class="bar-col"><div class="bar" style="height: 80%;"><span>800</span></div><label>Fri</label></div>
+                  <div class="bar-col peak"><div class="bar" style="height: 100%;"><span>1,250</span></div><label>Sat (Peak)</label></div>
+                  <div class="bar-col peak"><div class="bar" style="height: 95%;"><span>1,180</span></div><label>Sun (Peak)</label></div>
+                </div>
+              </div>
+
+              <!-- Revenue Distribution Breakdown -->
+              <div class="chart-box mt-4">
+                <h4>Revenue Contribution by Department</h4>
+                <div class="progress-bar-group">
+                  <div class="progress-item">
+                    <div class="p-header"><span>Crocodile Park & Gate Admissions</span><span>62% (KES 325,000)</span></div>
+                    <div class="p-track"><div class="p-fill" style="width: 62%; background: #10b981;"></div></div>
+                  </div>
+                  <div class="progress-item">
+                    <div class="p-header"><span>Lake Mamba Boat Rides</span><span>18% (KES 94,500)</span></div>
+                    <div class="p-track"><div class="p-fill" style="width: 18%; background: #d97706;"></div></div>
+                  </div>
+                  <div class="progress-item">
+                    <div class="p-header"><span>School Guided Tours & Education</span><span>12% (KES 63,000)</span></div>
+                    <div class="p-track"><div class="p-fill" style="width: 12%; background: #3b82f6;"></div></div>
+                  </div>
+                  <div class="progress-item">
+                    <div class="p-header"><span>Amusement & VIP Experiences</span><span>8% (KES 42,000)</span></div>
+                    <div class="p-track"><div class="p-fill" style="width: 8%; background: #8b5cf6;"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+
+  <!-- ============================================================== -->
+  <!-- MODAL: PAYMENT GATEWAY (M-PESA & CARD SIMULATOR - Module 13)   -->
+  <!-- ============================================================== -->
+  <div class="modal-overlay" id="checkoutModal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3>Lipa na M-Pesa / Secure Checkout</h3>
+          <span class="text-muted">Mamba Village Paybill: <strong>522522</strong> | Acc: <strong>MAMBA</strong></span>
+        </div>
+        <button class="modal-close" onclick="closeModal('checkoutModal')">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="payment-tabs">
+          <button class="pay-tab active" id="tabMpesaBtn" onclick="switchPaymentMethod('mpesa')">
+            <span class="tab-icon">🟢</span> M-Pesa STK Push
+          </button>
+          <button class="pay-tab" id="tabCardBtn" onclick="switchPaymentMethod('card')">
+            <span class="tab-icon">💳</span> Credit / Debit Card
+          </button>
+        </div>
+
+        <!-- M-PESA Pane -->
+        <div id="payMpesaPane" class="pay-pane active">
+          <div class="mpesa-callout">
+            <div class="mpesa-logo">M-PESA</div>
+            <p>An instant prompt will appear on your phone asking for your M-Pesa PIN to complete payment of <strong id="modalPayAmountMpesa">KES 500</strong>.</p>
+          </div>
+
+          <div class="form-group mt-3">
+            <label>Confirm Phone Number (Safaricom)</label>
+            <input type="tel" id="mpesaConfirmPhone" class="input-large text-center" value="0712345678">
+          </div>
+
+          <button class="btn btn-green btn-block btn-large mt-3" id="btnTriggerStk" onclick="triggerMpesaPush()">
+            Send STK Push Prompt
+          </button>
+
+          <!-- STK Simulation Animation Overlay -->
+          <div id="stkPushWaiting" class="stk-waiting-box" style="display: none;">
+            <div class="spinner"></div>
+            <h4>STK Push Sent to Mobile!</h4>
+            <p>Please enter your 4-digit M-Pesa PIN on your phone handset...</p>
+            <div class="countdown-badge" id="stkCountdown">Waiting: 8s</div>
+          </div>
+        </div>
+
+        <!-- CARD Pane -->
+        <div id="payCardPane" class="pay-pane" style="display: none;">
+          <div class="form-group">
+            <label>Cardholder Name</label>
+            <input type="text" id="cardName" placeholder="Cyrrus Korir">
+          </div>
+          <div class="form-group">
+            <label>Card Number</label>
+            <input type="text" id="cardNumber" placeholder="4242 •••• •••• 4242" maxlength="19">
+          </div>
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label>Expiry (MM/YY)</label>
+              <input type="text" id="cardExpiry" placeholder="08/27" maxlength="5">
+            </div>
+            <div class="form-group flex-1">
+              <label>CVV / CVC</label>
+              <input type="password" id="cardCvv" placeholder="123" maxlength="3">
+            </div>
+          </div>
+          <button class="btn btn-gold btn-block btn-large mt-3" onclick="triggerCardPayment()">
+            Pay <span id="modalPayAmountCard">KES 500</span> Securely
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================== -->
+  <!-- MODAL: DIGITAL QR TICKET & INVOICE WALLET (Module 1.5.7 & 12)  -->
+  <!-- ============================================================== -->
+  <div class="modal-overlay" id="ticketWalletModal" style="display: none;">
+    <div class="modal-card modal-large">
+      <div class="modal-header">
+        <div>
+          <h3>Digital Entry Pass & Official Receipt</h3>
+          <span class="text-muted">Present this QR pass at the entrance gate for validation</span>
+        </div>
+        <button class="modal-close" onclick="closeModal('ticketWalletModal')">✕</button>
+      </div>
+
+      <div class="modal-body printable-ticket" id="digitalTicketBody">
+        <!-- Rendered via JS -->
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="window.print()">🖨️ Print E-Ticket & Receipt</button>
+        <button class="btn btn-primary" onclick="closeModal('ticketWalletModal')">Done</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================== -->
+  <!-- MODAL: GATE QR SCANNER SIMULATOR (Module 1.5.7 validation)     -->
+  <!-- ============================================================== -->
+  <div class="modal-overlay" id="gateScannerModal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Park Turnstile Gate Scanner</h3>
+        <button class="modal-close" onclick="closeModal('gateScannerModal')">✕</button>
+      </div>
+      <div class="modal-body text-center">
+        <div class="scanner-viewfinder">
+          <div class="laser-beam"></div>
+          <div class="scan-target-box">
+            <span class="scan-corner tl"></span>
+            <span class="scan-corner tr"></span>
+            <span class="scan-corner bl"></span>
+            <span class="scan-corner br"></span>
+            <div class="scan-text">Align QR code within frame</div>
+          </div>
+        </div>
+
+        <p class="mt-3">Or manually enter Ticket Reference Code:</p>
+        <div class="scanner-input-row">
+          <input type="text" id="manualTicketInput" placeholder="e.g., MV-2026-7841">
+          <button class="btn btn-primary" onclick="verifyTicketFromGate()">Validate Code</button>
+        </div>
+
+        <div id="gateValidationResult" class="gate-result-box" style="display: none;">
+          <!-- Result status -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Toast Notifications Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <div class="brand-logo footer-brand">
+          <div class="brand-icon">🐊</div>
+          <div class="brand-text">
+            <span class="brand-title">Mamba Village</span>
+            <span class="brand-sub">Nairobi, Kenya</span>
+          </div>
+        </div>
+        <p class="footer-bio">
+          East Africa's renowned crocodile conservation sanctuary, nature botanical park, and premier family leisure destination.
+        </p>
+        <div class="academic-note">
+          <strong>Undergraduate Capstone Project (CISY 401)</strong><br>
+          Kenya Methodist University (KeMU) — June 2025 Submission<br>
+          Student: Cyrrus Kipkirui Korir | Supervisor: Mr. David Murithi Kaje
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Park Attractions</h4>
+        <ul>
+          <li><a href="#attractions">Giant Nile Crocodiles</a></li>
+          <li><a href="#attractions">Ostrich & Tortoise Sanctuary</a></li>
+          <li><a href="#attractions">Lake Mamba Boat Rides</a></li>
+          <li><a href="#attractions">Botanical Gardens</a></li>
+          <li><a href="#attractions">Children’s Amusement Park</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>System Modules</h4>
+        <ul>
+          <li><a href="#booking">Online Ticket Booking</a></li>
+          <li><a href="#groups">Institutional Packages</a></li>
+          <li><a href="#feeding">Feeding Timetable</a></li>
+          <li><a href="javascript:void(0)" onclick="switchMainView('staff')">Staff & Admin Portal</a></li>
+          <li><a href="#reviews">Visitor Feedback</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact & Location</h4>
+        <p>📍 Langata North Road, Karen Area, Nairobi, Kenya</p>
+        <p>📞 Phone: +254 700 000 000 / +254 722 123 456</p>
+        <p>✉️ Email: info@mambavillagenairobi.co.ke</p>
+        <p>⏰ Hours: Monday – Sunday: 9:00 AM – 6:00 PM</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025–2026 Mamba Village Nairobi. Research and Development by Cyrrus Kipkirui Korir.</p>
+      <div class="footer-links">
+        <a href="#help">Privacy & Wildlife Safety</a>
+        <a href="#help">Ticketing Terms</a>
+        <a href="#help">Help Desk</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript File -->
+  <script src="app.js"></script>
+</body>
+</html>
+

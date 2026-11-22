@@ -1,0 +1,248 @@
+/**
+ * Mamba Village Nairobi — Custom Production Stylesheet
+ * Engineered with clean CSS3 variables, typography, and responsive grid
+ */
+
+:root {
+  --mv-primary: #123e2c;
+  --mv-primary-dark: #092318;
+  --mv-primary-light: #1b5e43;
+  --mv-emerald: #10b981;
+  --mv-gold: #d97706;
+  --mv-gold-light: #f59e0b;
+  --mv-sand: #fbfbfa;
+  --mv-surface: #ffffff;
+  --mv-slate-900: #0f172a;
+  --mv-slate-700: #334155;
+  --mv-slate-500: #64748b;
+  --mv-slate-200: #e2e8f0;
+  --mv-slate-100: #f1f5f9;
+  --mv-border: #e2e8f0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--mv-sand);
+  color: var(--mv-slate-700);
+  line-height: 1.6;
+}
+
+/* Brand styling */
+.brand-mark {
+  background: linear-gradient(135deg, var(--mv-primary-dark), var(--mv-primary-light));
+  color: #ffffff;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 10px rgba(18, 62, 44, 0.25);
+}
+
+/* Hero Section */
+.hero-wrapper {
+  background: linear-gradient(rgba(9, 35, 24, 0.85), rgba(9, 35, 24, 0.92)),
+              url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  color: #ffffff;
+  padding: 6rem 0 5rem;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0.35rem 1rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+
+.hero-title {
+  font-weight: 800;
+  font-size: 3.25rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.text-gold {
+  color: var(--mv-gold-light) !important;
+}
+
+.bg-primary-dark {
+  background-color: var(--mv-primary-dark) !important;
+}
+
+.bg-primary-mv {
+  background-color: var(--mv-primary) !important;
+}
+
+.btn-mv-primary {
+  background-color: var(--mv-primary);
+  border-color: var(--mv-primary);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.65rem 1.4rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+.btn-mv-primary:hover {
+  background-color: var(--mv-primary-dark);
+  border-color: var(--mv-primary-dark);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.btn-mv-gold {
+  background: linear-gradient(135deg, var(--mv-gold-light), var(--mv-gold));
+  border-color: var(--mv-gold);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.65rem 1.4rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+  transition: all 0.2s ease;
+}
+.btn-mv-gold:hover {
+  background: linear-gradient(135deg, var(--mv-gold), #b45309);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Card aesthetics */
+.attraction-card {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--mv-border);
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+.attraction-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.08);
+  border-color: #cbd5e1;
+}
+
+.attraction-img-wrap {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+.attraction-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.attraction-card:hover .attraction-img-wrap img {
+  transform: scale(1.06);
+}
+.attraction-category-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(6px);
+  color: #ffffff;
+  padding: 0.3rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Feeding Timeline */
+.timeline-track {
+  position: relative;
+  padding-left: 2.5rem;
+}
+.timeline-track::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 15px;
+  width: 2px;
+  background: var(--mv-border);
+}
+.timeline-point {
+  position: absolute;
+  left: 5px;
+  top: 18px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 4px solid var(--mv-primary);
+  box-shadow: 0 0 0 4px var(--mv-slate-100);
+}
+.timeline-point.point-highlight {
+  border-color: var(--mv-gold);
+  box-shadow: 0 0 0 4px #fef3c7;
+}
+
+/* Digital QR Ticket Pass */
+.ticket-document {
+  background: #ffffff;
+  border: 2px solid var(--mv-primary);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+.ticket-header {
+  background: var(--mv-primary);
+  color: #ffffff;
+  padding: 1.5rem;
+}
+
+/* Admin Dashboard Layout */
+.admin-sidebar-nav .nav-link {
+  color: #cbd5e1;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+  transition: all 0.15s ease;
+}
+.admin-sidebar-nav .nav-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+.admin-sidebar-nav .nav-link.active {
+  background: var(--mv-emerald);
+  color: #042f1a;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.25);
+}
+
+.kpi-stat-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--mv-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Print Rules */
+@media print {
+  .no-print, nav, footer, .btn, .modal {
+    display: none !important;
+  }
+  .printable-area {
+    width: 100% !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
